@@ -1,0 +1,26 @@
+.header-middle .right-entries {
+    width: 200px;
+}
+
+.ytc_video_container{
+    padding: 10px;
+}
+
+.donation-wrapper{
+    padding: 30px;
+    background-color: #3A3A3A;
+    color: #fff;
+    font-family: Verdana;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+}
+
+
+.sidebar-navigation.donation{
+     border: none;
+}
+
+.sidebar-navigation.videotheque{
+    margin-bottom: 0;
+}

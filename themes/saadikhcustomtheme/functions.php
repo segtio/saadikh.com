@@ -1,7 +1,7 @@
 <?php
 /*
- *  Author: Todd Motto | @toddmotto
- *  URL: html5blank.com | @html5blank
+ *  Author: MADICORP | @madicorpsenegal
+ *  URL: madi-corp.net | @madicorpsenegal
  *  Custom functions, support, custom post types and more.
  */
 
@@ -63,16 +63,16 @@ if (function_exists('add_theme_support'))
 \*------------------------------------*/
 
 // HTML5 Blank navigation
-function html5blank_nav()
+function custom_nav()
 {
 	wp_nav_menu(
 	array(
 		'theme_location'  => 'header-menu',
 		'menu'            => '',
-		'container'       => 'div',
-		'container_class' => 'menu-{menu slug}-container',
+		'container'       => '',
+		'container_class' => '',
 		'container_id'    => '',
-		'menu_class'      => 'menu',
+		'menu_class'      => '',
 		'menu_id'         => '',
 		'echo'            => true,
 		'fallback_cb'     => 'wp_page_menu',
@@ -81,7 +81,7 @@ function html5blank_nav()
 		'link_before'     => '',
 		'link_after'      => '',
 		'items_wrap'      => '<ul>%3$s</ul>',
-		'depth'           => 0,
+		'depth'           => 1,
 		'walker'          => ''
 		)
 	);
@@ -92,14 +92,24 @@ function html5blank_header_scripts()
 {
     if ($GLOBALS['pagenow'] != 'wp-login.php' && !is_admin()) {
 
-    	wp_register_script('conditionizr', get_template_directory_uri() . '/js/lib/conditionizr-4.3.0.min.js', array(), '4.3.0'); // Conditionizr
-        wp_enqueue_script('conditionizr'); // Enqueue it!
 
-        wp_register_script('modernizr', get_template_directory_uri() . '/js/lib/modernizr-2.7.1.min.js', array(), '2.7.1'); // Modernizr
-        wp_enqueue_script('modernizr'); // Enqueue it!
+    	wp_register_script('jquery_2.1.3', get_template_directory_uri() . '/js/lib/jquery-2.1.3.min.js', array(), '2.1.3'); // Conditionizr
+        wp_enqueue_script('jquery_2.1.3'); // Enqueue it!
 
-        wp_register_script('html5blankscripts', get_template_directory_uri() . '/js/scripts.js', array('jquery'), '1.0.0'); // Custom scripts
-        wp_enqueue_script('html5blankscripts'); // Enqueue it!
+        wp_register_script('idangerous.swiper', get_template_directory_uri() . '/js/lib/idangerous.swiper.min.js', array('jquery_2.1.3'), '1.0.0'); // theme script
+        wp_enqueue_script('idangerous.swiper'); // Enqueue it!
+
+        wp_register_script('global', get_template_directory_uri() . '/js/lib/global.js', array('jquery_2.1.3'), '1.0.0'); // theme script
+        wp_enqueue_script('global'); // Enqueue it!
+
+        wp_register_script('jquery.mousewheel', get_template_directory_uri() . '/js/lib/jquery.mousewheel.js', array('jquery_2.1.3'), '1.0.0'); // theme script
+        wp_enqueue_script('jquery.mousewheel'); // Enqueue it!
+
+        wp_register_script('jquery.jscrollpane', get_template_directory_uri() . '/js/lib/jquery.jscrollpane.min.js', array('jquery_2.1.3'), '1.0.0'); // theme script
+        wp_enqueue_script('jquery.jscrollpane'); // Enqueue it!
+
+        wp_register_script('customjs', get_template_directory_uri() . '/js/scripts.js', array('jquery_2.1.3'), '1.0.0'); // Custom scripts
+        wp_enqueue_script('customjs'); // Enqueue it!
     }
 }
 
@@ -126,7 +136,7 @@ function html5blank_styles()
 function register_html5_menu()
 {
     register_nav_menus(array( // Using array to specify more menus if needed
-        'header-menu' => __('Header Menu', 'html5blank'), // Main Navigation
+        'header-menu' => __('Header Menu', 'custom'), // Main Navigation
         'sidebar-menu' => __('Sidebar Menu', 'html5blank'), // Sidebar Navigation
         'extra-menu' => __('Extra Menu', 'html5blank') // Extra Navigation if needed (duplicate as many as you need!)
     ));
@@ -160,6 +170,7 @@ function add_slug_to_body_class($classes)
         if ($key > -1) {
             unset($classes[$key]);
         }
+        $classes[] = "style-3";
     } elseif (is_page()) {
         $classes[] = sanitize_html_class($post->post_name);
     } elseif (is_singular()) {
@@ -306,26 +317,29 @@ function html5blankcomments($comment, $args, $depth)
 	}
 ?>
     <!-- heads up: starting < for the html tag (li or div) in the next line: -->
-    <<?php echo $tag ?> <?php comment_class(empty( $args['has_children'] ) ? '' : 'parent') ?> id="comment-<?php comment_ID() ?>">
+    <<?php echo $tag ?> class="comment" <?php comment_class(empty( $args['has_children'] ) ? '' : 'parent') ?> id="comment-<?php comment_ID() ?>">
 	<?php if ( 'div' != $args['style'] ) : ?>
 	<div id="div-comment-<?php comment_ID() ?>" class="comment-body">
 	<?php endif; ?>
-	<div class="comment-author vcard">
-	<?php if ($args['avatar_size'] != 0) echo get_avatar( $comment, $args['180'] ); ?>
-	<?php printf(__('<cite class="fn">%s</cite> <span class="says">says:</span>'), get_comment_author_link()) ?>
-	</div>
+    <?php if ($args['avatar_size'] != 0) echo '<a href="#" class="comment-image">'.  get_avatar( $comment, $args['180'] ).'</a>'; ?>
 <?php if ($comment->comment_approved == '0') : ?>
 	<em class="comment-awaiting-moderation"><?php _e('Your comment is awaiting moderation.') ?></em>
 	<br />
 <?php endif; ?>
 
-	<div class="comment-meta commentmetadata"><a href="<?php echo htmlspecialchars( get_comment_link( $comment->comment_ID ) ) ?>">
-		<?php
-			printf( __('%1$s at %2$s'), get_comment_date(),  get_comment_time()) ?></a><?php edit_comment_link(__('(Edit)'),'  ','' );
-		?>
+	<div class="comment-content">
+        <div class="comment-title">
+            <span>
+                <a href="<?php echo htmlspecialchars( get_comment_link( $comment->comment_ID ) ) ?>">
+            </span>
+            <?php
+            printf( __('%1$s at %2$s'), get_comment_date(),  get_comment_time()) ?></a><?php edit_comment_link(__('(Edit)'),'  ','' );
+            ?>
+        </div>
+        <div class="comment-text">
+            <?php comment_text() ?>
+        </div>
 	</div>
-
-	<?php comment_text() ?>
 
 	<div class="reply">
 	<?php comment_reply_link(array_merge( $args, array('add_below' => $add_below, 'depth' => $depth, 'max_depth' => $args['max_depth']))) ?>

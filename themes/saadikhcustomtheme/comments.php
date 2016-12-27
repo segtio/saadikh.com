@@ -6,12 +6,8 @@
 	<?php return; endif; ?>
 
 <?php if (have_comments()) : ?>
-
-	<h2><?php comments_number(); ?></h2>
-
-	<ul>
-		<?php wp_list_comments('type=comment&callback=html5blankcomments'); // Custom callback in functions.php ?>
-	</ul>
+	<h3 class="additional-blog-title"><?php comments_number(); ?></h3>
+		<?php wp_list_comments(array('style' => 'div', 'class' => 'comment'),'type=comment&callback=html5blankcomments'); // Custom callback in functions.php ?>
 
 <?php elseif ( ! comments_open() && ! is_page() && post_type_supports( get_post_type(), 'comments' ) ) : ?>
 

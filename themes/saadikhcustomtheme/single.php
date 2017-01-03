@@ -26,8 +26,8 @@
                             <!-- /post title -->
                             <div class="subtitle">
                                 <?php the_time('F j, Y'); ?><?php the_time('g:i a'); ?>
-                                <?php the_author(); ?>
-                                / Category:
+                                <a href="#"><?php the_author(); ?></a>
+                                / Categories:
                                 <?php _e('Categorised in: ', 'html5blank');
                                 the_category(', '); // Separated by commas ?>
                             </div>

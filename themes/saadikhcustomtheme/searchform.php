@@ -1,6 +1,13 @@
 <!-- search -->
-<form class="search" method="get" action="<?php echo home_url(); ?>" role="search">
-	<input class="search-input" type="search" name="s" placeholder="<?php _e( 'To search, type and hit enter.', 'html5blank' ); ?>">
-	<button class="search-submit" type="submit" role="button"><?php _e( 'Search', 'html5blank' ); ?></button>
-</form>
+<div class="search-box size-1">
+	<form class="search" method="get" action="<?php echo home_url(); ?>" role="search">
+		<div class="search-button">
+			<i class="fa fa-search"></i>
+			<input type="submit" />
+		</div>
+		<div class="search-field">
+			<input name="s" type="text" value="" placeholder="Search for product" />
+		</div>
+	</form>
+</div>
 <!-- /search -->

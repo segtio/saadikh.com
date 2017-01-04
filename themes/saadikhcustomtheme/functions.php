@@ -63,12 +63,12 @@ if (function_exists('add_theme_support'))
 \*------------------------------------*/
 
 // HTML5 Blank navigation
-function custom_nav()
+function custom_nav($menu)
 {
 	wp_nav_menu(
 	array(
 		'theme_location'  => 'header-menu',
-		'menu'            => '',
+		'menu'            => $menu,
 		'container'       => '',
 		'container_class' => '',
 		'container_id'    => '',
@@ -333,7 +333,7 @@ add_action('wp_print_scripts', 'html5blank_conditional_scripts'); // Add Conditi
 add_action('get_header', 'enable_threaded_comments'); // Enable Threaded Comments
 add_action('wp_enqueue_scripts', 'html5blank_styles'); // Add Theme Stylesheet
 add_action('init', 'register_html5_menu'); // Add HTML5 Blank Menu
-add_action('init', 'create_post_type_html5'); // Add our HTML5 Blank Custom Post Type
+//add_action('init', 'create_post_type_html5'); // Add our HTML5 Blank Custom Post Type
 add_action('widgets_init', 'my_remove_recent_comments_style'); // Remove inline Recent Comment Styles from wp_head()
 add_action('init', 'html5wp_pagination'); // Add our HTML5 Pagination
 
@@ -379,10 +379,28 @@ add_shortcode('html5_shortcode_demo_2', 'html5_shortcode_demo_2'); // Place [htm
 // Shortcodes above would be nested like this -
 // [html5_shortcode_demo] [html5_shortcode_demo_2] Here's the page title! [/html5_shortcode_demo_2] [/html5_shortcode_demo]
 
+//woocommerce
+
+// add the action
+
+
+add_filter( 'woocommerce_enqueue_styles', '__return_empty_array' ); //disable css
+
+
+// Moving the catalog section up
+remove_action( 'woocommerce_before_shop_loop', 'woocommerce_result_count', 20 );
+add_action( 'woocommerce_before_shop_loop', 'woocommerce_pagination', 10 );
+add_action( 'woocommerce_after_shop_loop', 'woocommerce_result_count', 20 );
+
+remove_action( 'woocommerce_before_checkout_form', 'woocommerce_checkout_login_form', 10 );
+add_action( 'woocommerce_checkout_before_customer_details', 'woocommerce_checkout_login_form', 10 );
+
+
 /*------------------------------------*\
 	Custom Post Types
 \*------------------------------------*/
 
+/*------------------------------------*\
 // Create 1 Custom Post type for a Demo, called HTML5-Blank
 function create_post_type_html5()
 {
@@ -420,7 +438,7 @@ function create_post_type_html5()
         ) // Add Category and Post Tags support
     ));
 }
-
+\*------------------------------------*/
 /*------------------------------------*\
 	ShortCode Functions
 \*------------------------------------*/

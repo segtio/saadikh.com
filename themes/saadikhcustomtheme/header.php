@@ -83,7 +83,7 @@
 								</div>
 								<!-- nav -->
 								<nav>
-									<?php custom_nav(); ?>
+									<?php custom_nav('main menu'); ?>
 								</nav>
 								<!-- /nav -->
 								<div class="navigation-footer responsive-menu-toggle-class">

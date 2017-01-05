@@ -15,53 +15,62 @@
  * @package WooCommerce/Templates
  * @version 2.1.2
  */
-if ( ! defined( 'ABSPATH' ) ) {
+if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly
 }
 /** @global WC_Checkout $checkout */
 ?>
-<div class="woocommerce-billing-fields">
-    <?php if ( wc_ship_to_billing_address_only() && WC()->cart->needs_shipping() ) : ?>
 
-        <h3><?php _e( 'Billing &amp; Shipping', 'woocommerce' ); ?></h3>
 
-    <?php else : ?>
+    <?php do_action('woocommerce_before_checkout_billing_form', $checkout); ?>
 
-        <h3><?php _e( 'Billing Details', 'woocommerce' ); ?></h3>
+    <?php foreach ($checkout->checkout_fields['billing'] as $key => $field) : ?>
+        <div class="col-sm-6">
+                <?php
+                if ($field["type"] == 'country') {
+                    $field["class"] = array(" simple-drop-down simple-field");
 
-    <?php endif; ?>
+                    echo "<label>" . $field['label'] . "</label>";
 
-    <?php do_action( 'woocommerce_before_checkout_billing_form', $checkout ); ?>
+                    $field["label"] = false;
+                } else {
+                    $field["input_class"] = array("simple-field");
+                }
 
-    <?php foreach ( $checkout->checkout_fields['billing'] as $key => $field ) : ?>
+                woocommerce_form_field($key, $field, $checkout->get_value($key));
+                ?>
 
-        <?php woocommerce_form_field( $key, $field, $checkout->get_value( $key ) ); ?>
+        </div>
 
     <?php endforeach; ?>
+    <div class="clear"></div>
+    <?php do_action('woocommerce_after_checkout_billing_form', $checkout); ?>
 
-    <?php do_action('woocommerce_after_checkout_billing_form', $checkout ); ?>
+    <?php if (!is_user_logged_in() && $checkout->enable_signup) : ?>
 
-    <?php if ( ! is_user_logged_in() && $checkout->enable_signup ) : ?>
-
-        <?php if ( $checkout->enable_guest_checkout ) : ?>
-
-            <p class="form-row form-row-wide create-account">
-                <input class="input-checkbox" id="createaccount" <?php checked( ( true === $checkout->get_value( 'createaccount' ) || ( true === apply_filters( 'woocommerce_create_account_default_checked', false ) ) ), true) ?> type="checkbox" name="createaccount" value="1" /> <label for="createaccount" class="checkbox"><?php _e( 'Create an account?', 'woocommerce' ); ?></label>
-            </p>
+        <?php if ($checkout->enable_guest_checkout) : ?>
+    <div class="col-sm-12">
+            <label class="checkbox-entry">
+                <input class="input-checkbox" type="checkbox" id="createaccount"
+                    <?php checked((true === $checkout->get_value('createaccount') || (true === apply_filters('woocommerce_create_account_default_checked', false))), true) ?>
+                       type="checkbox" name="createaccount" value="1"> <span class="check"></span> <?php _e('Create an account?', 'woocommerce'); ?>
+            </label>
+        </div>
 
         <?php endif; ?>
 
-        <?php do_action( 'woocommerce_before_checkout_registration_form', $checkout ); ?>
+        <?php do_action('woocommerce_before_checkout_registration_form', $checkout); ?>
 
-        <?php if ( ! empty( $checkout->checkout_fields['account'] ) ) : ?>
+        <?php if (!empty($checkout->checkout_fields['account'])) : ?>
 
             <div class="create-account">
 
-                <p><?php _e( 'Create an account by entering the information below. If you are a returning customer please login at the top of the page.', 'woocommerce' ); ?></p>
+                <p><?php _e('Create an account by entering the information below. If you are a returning customer please login at the top of the page.', 'woocommerce'); ?></p>
 
-                <?php foreach ( $checkout->checkout_fields['account'] as $key => $field ) : ?>
+                <?php foreach ($checkout->checkout_fields['account'] as $key => $field) : ?>
+                    <?php $field["class"] = array("col-sm-6");  $field["input_class"] = array("simple-field"); ?>
 
-                    <?php woocommerce_form_field( $key, $field, $checkout->get_value( $key ) ); ?>
+                    <?php woocommerce_form_field($key, $field, $checkout->get_value($key)); ?>
 
                 <?php endforeach; ?>
 
@@ -71,7 +80,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
         <?php endif; ?>
 
-        <?php do_action( 'woocommerce_after_checkout_registration_form', $checkout ); ?>
+        <?php do_action('woocommerce_after_checkout_registration_form', $checkout); ?>
 
     <?php endif; ?>
-</div>
+
+

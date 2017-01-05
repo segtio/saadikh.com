@@ -383,6 +383,29 @@ add_shortcode('html5_shortcode_demo_2', 'html5_shortcode_demo_2'); // Place [htm
 
 // add the action
 
+add_action( 'woocommerce_checkout_init', 'wc_add_confirm_password_checkout', 10, 1 );
+function wc_add_confirm_password_checkout( $checkout ) {
+    if ( get_option( 'woocommerce_registration_generate_password' ) == 'no' ) {
+        $checkout->checkout_fields['account']['account_password2'] = array(
+            'type' 				=> 'password',
+            'input_class'       => array("simple-field"),
+            'label' 			=> __( 'Confirm password', 'woocommerce' ),
+            'required'          => true,
+            'placeholder' 		=> _x( 'Confirm Password', 'placeholder', 'woocommerce' )
+        );
+    }
+}
+
+// Check the password and confirm password fields match before allow checkout to proceed.
+add_action( 'woocommerce_after_checkout_validation', 'wc_check_confirm_password_matches_checkout', 10, 2 );
+function wc_check_confirm_password_matches_checkout( $posted ) {
+    $checkout = WC()->checkout;
+    if ( ! is_user_logged_in() && ( $checkout->must_create_account || ! empty( $posted['createaccount'] ) ) ) {
+        if ( strcmp( $posted['account_password'], $posted['account_password2'] ) !== 0 ) {
+            wc_add_notice( __( 'Passwords do not match.', 'woocommerce' ), 'error' );
+        }
+    }
+}
 
 add_filter( 'woocommerce_enqueue_styles', '__return_empty_array' ); //disable css
 

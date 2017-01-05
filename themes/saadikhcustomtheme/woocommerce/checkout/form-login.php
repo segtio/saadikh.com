@@ -23,24 +23,23 @@ if (is_user_logged_in() || 'no' === get_option('woocommerce_enable_checkout_logi
 }
 ?>
 
-    <div class="accordeon-title active">
-        <span class="number"><i class="fa fa-user"></i></span>
-        <?= apply_filters('woocommerce_checkout_login_message', __('Returning customer?', 'woocommerce')), " " ,__('login', 'woocommerce')  ?>
-    </div>
-    <div class="accordeon-entry" style="display: block;">
-        <div class="row">
-            <div class="col-md-6 information-entry">
-               
-                    <?php
-                    woocommerce_login_form(
-                        array(
-                            'message' => __('If you have shopped with us before, please enter your details in the boxes below. If you are a new customer, please proceed to the Billing &amp; Shipping section.', 'woocommerce'),
-                            'redirect' => wc_get_page_permalink('checkout'),
-                            'hidden' => false
-                        )
-                    );
-                    ?>
-                </div>
-            </div>
+<div class="accordeon-title active">
+    <span class="number"><i class="fa fa-user"></i></span>
+    <?= apply_filters('woocommerce_checkout_login_message', __('Returning customer?', 'woocommerce')), " ", __('Click here to login', 'woocommerce') ?>
+</div>
+<div class="accordeon-entry">
+    <div class="row">
+        <div class="col-md-8 information-entry">
+
+            <?php
+            woocommerce_login_form(
+                array(
+                    'message' => __('If you have shopped with us before, please enter your details in the boxes below. If you are a new customer, please proceed to the Billing &amp; Shipping section.', 'woocommerce'),
+                    'redirect' => wc_get_page_permalink('checkout'),
+                    'hidden' => false
+                )
+            );
+            ?>
         </div>
     </div>
+</div>

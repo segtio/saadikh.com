@@ -486,11 +486,19 @@ $(function() {
     $('.number-plus').on('click', function(){
     	var divUpd = $(this).parent().find('.number'), newVal = parseInt(divUpd.text(), 10)+1;
     	divUpd.text(newVal);
+		var input_name = $(divUpd).data('input');
+		console.log(input_name);
+		$("input[name='"+ input_name +"']").val(newVal);
+		console.log($("input[name='"+ input_name +"']").attr("name"));
     });
 
     $('.number-minus').on('click', function(){
     	var divUpd = $(this).parent().find('.number'), newVal = parseInt(divUpd.text(), 10)-1;
     	if(newVal>=1) divUpd.text(newVal);
+		var input_name = $(divUpd).data('input');
+		console.log(input_name);
+		if(newVal>=1) $("input[name='"+ input_name +"']").val(newVal);
+		console.log($("input[name='"+ input_name +"']").attr("name"));
     });
 
     //accordeon

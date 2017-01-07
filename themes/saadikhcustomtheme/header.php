@@ -33,7 +33,18 @@
 
 						<div class="header-product">
 							<div class="logo-wrapper">
-								<a href="/" id="logo"><img alt="" src="<?php echo get_template_directory_uri(); ?>/img/logo.svg"></a>
+								<!-- <a href="/" id="logo"><img alt="" src="<?php echo get_template_directory_uri(); ?>/img/logo.svg"></a> -->
+								<?php
+								// Display the Custom Logo
+								the_custom_logo();
+
+								// No Custom Logo, just display the site's name
+								if (!has_custom_logo()) {
+								    ?>
+								    <h1><?php bloginfo('name'); ?></h1>
+								    <?php
+								}
+								?>
 							</div>
 							<div class="product-header-message">
 								<img src="http://www.makemoneyinlife.com/wp-content/uploads/2014/03/728x90-sample.png" alt="banner">

@@ -1,2 +1,8 @@
 # Created by .ignore support plugin (hsz.mobi)
 .idea
+languages/*
+plugins/*
+themes/twentyfifteen/*
+themes/twentyseventeen/*
+themes/twentysixteen/*
+uploads/*

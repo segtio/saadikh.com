@@ -1,8 +1,8 @@
 <?php
 /**
- * Shop breadcrumb
+ * Show error messages
  *
- * This template can be overridden by copying it to yourtheme/woocommerce/global/breadcrumb.php.
+ * This template can be overridden by copying it to yourtheme/woocommerce/notices/error.php.
  *
  * HOWEVER, on occasion WooCommerce will need to update template files and you
  * (the theme developer) will need to copy the new files to your theme to
@@ -13,18 +13,19 @@
  * @see 	    https://docs.woocommerce.com/document/template-structure/
  * @author 		WooThemes
  * @package 	WooCommerce/Templates
- * @version     2.3.0
- * @see         woocommerce_breadcrumb()
+ * @version     1.6.4
  */
 if ( ! defined( 'ABSPATH' ) ) {
-    exit;
+    exit; // Exit if accessed directly
 }
-if ( ! empty( $breadcrumb ) ) :
-    ?>
-    <div class='breadcrumb-box'>
-    <?php foreach ( $breadcrumb as $key => $crumb ) : ?>
-        <a href="<?= esc_url( $crumb[1] ) ?>"><?= esc_html( $crumb[0] )?></a>
-    <?php endforeach;?>
-    </div>
-<?php endif; ?>
+if ( ! $messages ) {
+    return;
+}
+?>
 
+<?php foreach ($messages as $message) : ?>
+    <div class="message-box message-danger">
+        <div class="message-icon"><i class="fa fa-times"></i></div>
+        <div class="message-text"><?php echo wp_kses_post($message); ?>.</div>
+    </div>
+<?php endforeach; ?>

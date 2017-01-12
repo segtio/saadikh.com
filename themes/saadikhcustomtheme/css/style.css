@@ -1670,7 +1670,7 @@ header .line-entry{white-space: nowrap;}
     .header-wrapper.style-10 header:not(.fixed-header) nav ul>li>a{color: #fff;}
     .header-wrapper.style-10 nav ul>li>.fa{color: #979797;}
     .header-wrapper.style-10 .navigation{border: none;}
-    .header-wrapper.style-10 header:not(.fixed-header) .nav-overflow{background: #323232; border: none;}
+    .header-wrapper.style-10 header:not(.fixed-header) .nav-overflow{background: #1c5b7e; border: none;}
     .header-wrapper.style-10 .nav-overflow:before{content: ""; width: 100000px; left: 50%; margin-left: -50000px; position: absolute; top: 0; height: 100%; background: inherit;}
 }
 /*Desktops (>=992px)*/
@@ -2196,7 +2196,7 @@ transform: translateX(-50%); position: relative;}
 
 /*portfolio custom fullwidth*/
 .portfolio-container .wide-container .image{margin-bottom: 0;}
-.portfolio-drop-down{position: absolute; width: 100%; top: 100%; left: 0; background: #323232; padding: 30px 45px; transform-origin: 50% 0% 0px; -webkit-transform-origin: 50% 0% 0px; -moz-transform-origin: 50% 0% 0px; -ms-transform-origin: 50% 0% 0px; transform: perspective(1000px) rotateX(180deg); -webkit-transform: perspective(1000px) rotateX(180deg); -moz-transform: perspective(1000px) rotateX(180deg); -ms-transform: perspective(1000px) rotateX(180deg); opacity: 0;}
+.portfolio-drop-down{position: absolute; width: 100%; top: 100%; left: 0; background: #1c5b7e; padding: 30px 45px; transform-origin: 50% 0% 0px; -webkit-transform-origin: 50% 0% 0px; -moz-transform-origin: 50% 0% 0px; -ms-transform-origin: 50% 0% 0px; transform: perspective(1000px) rotateX(180deg); -webkit-transform: perspective(1000px) rotateX(180deg); -moz-transform: perspective(1000px) rotateX(180deg); -ms-transform: perspective(1000px) rotateX(180deg); opacity: 0;}
 .portfolio-entry.active .portfolio-drop-down{transform: perspective(1000px) rotateX(0deg); -webkit-transform: perspective(1000px) rotateX(0deg); -moz-transform: perspective(1000px) rotateX(0deg); -ms-transform: perspective(1000px) rotateX(0deg); opacity: 1;}
 .portfolio-container .wide-container .portfolio-entry.active{z-index: 1;}
 .portfolio-drop-down .title{color: #fff;}

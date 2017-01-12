@@ -10,12 +10,12 @@
  * happen. When this occurs the version of the template file will be bumped and
  * the readme will list any important changes.
  *
- * @see 	    https://docs.woocommerce.com/document/template-structure/
- * @author 		WooThemes
- * @package 	WooCommerce/Templates
+ * @see        https://docs.woocommerce.com/document/template-structure/
+ * @author        WooThemes
+ * @package    WooCommerce/Templates
  * @version     1.6.4
  */
-if ( ! defined( 'ABSPATH' ) ) {
+if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly
 }
 ?>
@@ -26,57 +26,87 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @hooked wc_print_notices - 10
  */
-do_action( 'woocommerce_before_single_product' );
-if ( post_password_required() ) {
+do_action('woocommerce_before_single_product');
+if (post_password_required()) {
     echo get_the_password_form();
     return;
 }
 ?>
+    <div class="information-blocks">
+        <div class="row">
 
-<div itemscope itemtype="<?php echo woocommerce_get_product_schema(); ?>" id="product-<?php the_ID(); ?>" <?php post_class(); ?>>
+            <div class="col-sm-5 col-md-4 col-lg-5 information-entry">
+                <?php
+                /**
+                 * woocommerce_before_single_product_summary hook.
+                 *
+                 * @hooked woocommerce_show_product_sale_flash - 10
+                 * @hooked woocommerce_show_product_images - 20
+                 */
+                do_action('woocommerce_before_single_product_summary');
+                ?>
 
-    <?php
-    /**
-     * woocommerce_before_single_product_summary hook.
-     *
-     * @hooked woocommerce_show_product_sale_flash - 10
-     * @hooked woocommerce_show_product_images - 20
-     */
-    do_action( 'woocommerce_before_single_product_summary' );
-    ?>
+            </div>
+            <div class="col-sm-7 col-md-4 information-entry">
 
-    <div class="summary entry-summary">
+                <div class="product-detail-box">
+                    <?php
+                    /**
+                     * woocommerce_single_product_summary hook.
+                     *
+                     * @hooked woocommerce_template_single_title - 5
+                     * @hooked woocommerce_template_single_rating - 10
+                     * @hooked woocommerce_template_single_price - 10
+                     * @hooked woocommerce_template_single_excerpt - 20
+                     * @hooked woocommerce_template_single_add_to_cart - 30
+                     * @hooked woocommerce_template_single_meta - 40
+                     * @hooked woocommerce_template_single_sharing - 50
+                     */
+                    do_action('woocommerce_single_product_summary');
+                    ?>
+                </div>
+            </div>
+            <div class="col-md-4 col-lg-3 information-entry product-sidebar">
+                <div class="article-container style-1">
+                    <p>Custom CMS block displayed below the one page checkout progress block. Put your own content
+                        here.</p>
+                </div>
+                <div class="information-blocks">
+                    <a class="sale-entry vertical" href="#">
+                        <span class="hot-mark yellow">hot</span>
+                        <span class="sale-price"><span>-40%</span> Valentine <br> Underwear Sale</span>
+                        <span class="sale-description">Lorem ipsum dolor sitamet, conse adipisc sed do eiusmod tempor.</span>
+                        <img style="" class="sale-image" src="img/text-widget-image-3.jpg" alt="">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <div class="information-blocks">
         <?php
         /**
-         * woocommerce_single_product_summary hook.
+         * woocommerce_after_single_product_summary hook.
          *
-         * @hooked woocommerce_template_single_title - 5
-         * @hooked woocommerce_template_single_rating - 10
-         * @hooked woocommerce_template_single_price - 10
-         * @hooked woocommerce_template_single_excerpt - 20
-         * @hooked woocommerce_template_single_add_to_cart - 30
-         * @hooked woocommerce_template_single_meta - 40
-         * @hooked woocommerce_template_single_sharing - 50
+         * @hooked woocommerce_output_product_data_tabs - 10
+         * @hooked woocommerce_upsell_display - 15
          */
-        do_action( 'woocommerce_single_product_summary' );
+        do_action('woocommerce_after_single_product_summary');
         ?>
+    </div>
 
-    </div><!-- .summary -->
+<div class="information-blocks">
 
     <?php
     /**
-     * woocommerce_after_single_product_summary hook.
+     * woocommerce_single_product_related_products hook.
      *
-     * @hooked woocommerce_output_product_data_tabs - 10
-     * @hooked woocommerce_upsell_display - 15
-     * @hooked woocommerce_output_related_products - 20
+     * @hooked woocommerce_output_related_products - 5
      */
-    do_action( 'woocommerce_after_single_product_summary' );
+    do_action('woocommerce_single_product_related_products')
     ?>
+</div>
 
-    <meta itemprop="url" content="<?php the_permalink(); ?>" />
 
-</div><!-- #product-<?php the_ID(); ?> -->
-
-<?php do_action( 'woocommerce_after_single_product' ); ?>
+    <meta itemprop="url" content="<?php the_permalink(); ?>"/>
+<?php do_action('woocommerce_after_single_product'); ?>

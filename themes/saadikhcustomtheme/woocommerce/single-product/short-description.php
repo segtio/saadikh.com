@@ -1,8 +1,8 @@
 <?php
 /**
- * Shop breadcrumb
+ * Single product short description
  *
- * This template can be overridden by copying it to yourtheme/woocommerce/global/breadcrumb.php.
+ * This template can be overridden by copying it to yourtheme/woocommerce/single-product/short-description.php.
  *
  * HOWEVER, on occasion WooCommerce will need to update template files and you
  * (the theme developer) will need to copy the new files to your theme to
@@ -13,18 +13,16 @@
  * @see 	    https://docs.woocommerce.com/document/template-structure/
  * @author 		WooThemes
  * @package 	WooCommerce/Templates
- * @version     2.3.0
- * @see         woocommerce_breadcrumb()
+ * @version     1.6.4
  */
 if ( ! defined( 'ABSPATH' ) ) {
-    exit;
+    exit; // Exit if accessed directly
 }
-if ( ! empty( $breadcrumb ) ) :
-    ?>
-    <div class='breadcrumb-box'>
-    <?php foreach ( $breadcrumb as $key => $crumb ) : ?>
-        <a href="<?= esc_url( $crumb[1] ) ?>"><?= esc_html( $crumb[0] )?></a>
-    <?php endforeach;?>
-    </div>
-<?php endif; ?>
-
+global $post;
+if ( ! $post->post_excerpt ) {
+    return;
+}
+?>
+<div class="product-description detail-info-entry">
+    <?php echo apply_filters( 'woocommerce_short_description', $post->post_excerpt ) ?>
+</div>

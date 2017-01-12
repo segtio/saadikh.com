@@ -28,27 +28,23 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 }
 ?>
 <div class="col-md-3 col-sm-4 shop-grid-item">
-    <div class="product-slide-entry shift-image">
+    <div class="product-slide-entry">
         <div class="product-image">
-            <?= $product->get_image() ?>
-            <?= $product->get_image() ?>
-            <div class="bottom-line left-attached">
-                <a href="<?=$product->add_to_cart_url()?>" class="bottom-line-a square"><i class="fa fa-shopping-cart"></i></a>
-                <a class="bottom-line-a square"><i class="fa fa-heart"></i></a>
-                <a class="bottom-line-a square"><i class="fa fa-expand"></i></a>
+            <a href="<?= $product->get_permalink()?>"><?= $product->get_image() ?></a>
+            <?php do_action("woocommerce_quick_btn"); ?>
+            <div class="bottom-line">
+                <div class="right-align">
+                    <a  href="<?=$product->add_to_cart_url()?>" class="bottom-line-a square"><i class="fa fa-heart"></i></a>
+                </div>
+                <div>
+                    <a href="<?=$product->add_to_cart_url()?>" class="bottom-line-a"><i class="fa fa-shopping-cart"></i><?php _e("Add to cart", "woocommerce") ?></a>
+                </div>
             </div>
         </div>
-        <a class="tag" href="#">Men clothing</a>
+        <?= $product->get_categories( ', ', '<span class="tag">' . _n( 'Category:', 'Categories:', sizeof( get_the_terms( $post->ID, 'product_cat' ) ), 'woocommerce' ) . ' ', '.</span>' ); ?>
         <a class="title" href="<?= $product->get_permalink()?>"><?= $product->get_title() ?></a>
-        <div class="article-container style-1">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-        </div>
         <div class="price">
             <div class="current"><?= $product->price,' ', get_woocommerce_currency_symbol()?></div>
-        </div>
-        <div class="list-buttons">
-            <a class="button style-10">Add to cart</a>
-            <a class="button style-11"><i class="fa fa-heart"></i> Add to Wishlist</a>
         </div>
     </div>
     <div class="clear"></div>

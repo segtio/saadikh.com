@@ -20,21 +20,19 @@ if (!defined('ABSPATH')) {
 }
 
 ?>
-<div class='breadcrumb-box'>
-    <?php
-    /**
-     * woocommerce_before_main_content hook.
-     *
-     * @hooked woocommerce_breadcrumb - 20
-     */
-    do_action('woocommerce_before_main_content');
-    ?>
-</div>
 
+<?php
+/**
+ * woocommerce_before_main_content hook.
+ *
+ * @hooked woocommerce_breadcrumb - 20
+ */
+do_action('woocommerce_before_main_content');
+?>
 
-<div class="row tabs-container style-1">
+<div class="row tabs-container style-1 myaccount">
     <div class="col-md-9 col-md-push-3 col-sm-8 col-sm-push-4">
-        <div class="tabs-entry myaccount">
+        <div class="tabs-entry ">
             <?php
             /**
              * My Account content.

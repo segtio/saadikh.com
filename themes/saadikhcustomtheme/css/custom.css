@@ -107,7 +107,7 @@ header{
     margin-bottom: 10px;
 }
 
-.tabs-container.style-1 .tab-switcher{
+.myaccount .tab-switcher{
     width: 100%;
     -moz-transition: all 0.15s ease-out;
     -o-transition: all 0.15s ease-out;
@@ -116,15 +116,45 @@ header{
     -ms-transition: all 0.15s ease-out;
 }
 
-.tabs-container.style-1 .tab-switcher:hover{
+.myaccount .tab-switcher:hover{
     background: #f0f0f0;
 }
 
-.tabs-entry.myaccount {
+.myaccount .tabs-entry {
     border-top: 1px #e6e6e6 solid !important;
 }
 
 .logo-wrapper a img{
-    height: 100px;
-    width: 100px;
+    height: 100px !important;
+    width: 100px !important;
+}
+
+.price, .current, .cart-box.popup .summary .grandtotal span{
+    color: #246787 !important;
+}
+
+nav ul>li>a{
+    color: #1c5b7e;
+}
+.article-container a, .article-container a{
+    color: #1c5b7e !important;
+}
+
+.sidebar-navigation{
+    border-color: #1c5b7e;
+}
+
+.sidebar-navigation .title{
+
+    background: #1c5b7e;
+}
+
+ .button.style-17, .button.style-4, .search-button, .quantity-selector .entry.number-minus:hover, .quantity-selector .entry.number-plus:hover, .tabs-container.style-1 .tab-switcher.active {
+    border-color: #1c5b7e;
+    background: #1c5b7e;
+}
+
+.button.style-17:hover, .button.style-4:hover {
+    background: transparent;
+    color: #2e2e2e;
 }

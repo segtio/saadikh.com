@@ -407,6 +407,26 @@ function wc_check_confirm_password_matches_checkout( $posted ) {
     }
 }
 
+/**
+ * Output the product meta.
+ *
+ * @subpackage  Product
+ */
+function woocommerce_template_single_cat() {
+    wc_get_template( 'single-product/_cat.php' );
+}
+
+
+/**
+ * Output the product meta.
+ *
+ * @subpackage  Product
+ */
+function woocommerce_template_single_tag() {
+    wc_get_template( 'single-product/_tag.php' );
+}
+
+
 add_filter( 'woocommerce_enqueue_styles', '__return_empty_array' ); //disable css
 
 
@@ -418,6 +438,26 @@ add_action( 'woocommerce_after_shop_loop', 'woocommerce_result_count', 20 );
 remove_action( 'woocommerce_before_checkout_form', 'woocommerce_checkout_login_form', 10 );
 add_action( 'woocommerce_checkout_before_customer_details', 'woocommerce_checkout_login_form', 10 );
 
+remove_action( 'woocommerce_before_shop_loop', 'wc_print_notices', 10 );
+add_action( 'woocommerce_before_shop_loop_notice', 'wc_print_notices', 10 );
+
+remove_action('woocommerce_after_shop_loop_item', 'wpqv_button', 15);
+add_action('woocommerce_quick_btn', 'wpqv_button', 15);
+
+remove_action('woocommerce_before_single_product', 'woocommerce_breadcrumb', 20);
+add_action('woocommerce_breadcrumb', 'woocommerce_breadcrumb', 20);
+
+remove_action('woocommerce_single_product_summary','woocommerce_template_single_meta',40);
+add_action('woocommerce_single_product_summary','woocommerce_template_single_cat',5);
+add_action('woocommerce_single_product_summary','woocommerce_template_single_tag',40);
+
+remove_action('woocommerce_single_product_summary','woocommerce_template_single_price',10);
+remove_action('woocommerce_single_product_summary','woocommerce_template_single_excerpt',20);
+add_action('woocommerce_single_product_summary','woocommerce_template_single_excerpt',10);
+add_action('woocommerce_single_product_summary','woocommerce_template_single_price',20);
+
+remove_action('woocommerce_after_single_product_summary','woocommerce_output_related_products',20);
+add_action('woocommerce_single_product_related_products','woocommerce_output_related_products',5);
 
 /*------------------------------------*\
 	Custom Post Types

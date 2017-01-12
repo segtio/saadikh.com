@@ -21,17 +21,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 wc_print_notices();
 do_action( 'woocommerce_before_cart' ); ?>
 
-
-    <div class='breadcrumb-box'>
-        <?php
-        /**
-         * woocommerce_before_main_content hook.
-         *
-         * @hooked woocommerce_breadcrumb - 20
-         */
-        do_action( 'woocommerce_before_main_content' );
-        ?>
-    </div>
+<?php
+/**
+ * woocommerce_before_main_content hook.
+ *
+ * @hooked woocommerce_breadcrumb - 20
+ */
+do_action( 'woocommerce_before_main_content' );
+?>
 <div class="information-blocks">
     <div class="row">
         <form action="<?php echo esc_url( wc_get_cart_url() ); ?>" method="post">

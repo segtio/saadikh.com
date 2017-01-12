@@ -19,16 +19,14 @@ if (!defined('ABSPATH')) {
     exit;
 }
 ?>
-<div class='breadcrumb-box'>
-    <?php
-    /**
-     * woocommerce_before_main_content hook.
-     *
-     * @hooked woocommerce_breadcrumb - 20
-     */
-    do_action('woocommerce_before_main_content');
-    ?>
-</div>
+<?php
+/**
+ * woocommerce_before_main_content hook.
+ *
+ * @hooked woocommerce_breadcrumb - 20
+ */
+do_action('woocommerce_before_main_content');
+?>
 <div class="information-blocks">
     <div class="row">
         <div class="col-sm-9 information-entry">
